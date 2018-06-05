@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { convertTemp, getDate, formatWeather } from './helpers';
 
 // const MyapiKey = '7ff756e92618963fba03d289aaf2b55d';
 const apiKey = 'b714ec74bbab5650795063cb0fdf5fbe';
 
 export async function getCurrentWeather(city, state) {
-  const fetchInfo = await axios(
+  const fetchInfo = await fetch(
     `//api.openweathermap.org/data/2.5/weather?q=${city},${state}&type=accurate&APPID=${apiKey}`
   );
-  const data = await fetchInfo.data;
+  const data = await fetchInfo.json();
   return data;
 }
 
@@ -32,10 +31,10 @@ export function getCurrentWeatherState(weather) {
 }
 
 export async function getFiveDayWeather(city, state) {
-  const fetchInfo = await axios(
+  const fetchInfo = await fetch(
     `//api.openweathermap.org/data/2.5/forecast/daily?q=${city},${state}&units=imperial&type=accurate&APPID=${apiKey}&cnt=5`
   );
-  const data = await fetchInfo.data;
+  const data = await fetchInfo.json();
   const fiveDayForecast = formatWeather(data);
 
   return fiveDayForecast;
@@ -66,7 +65,7 @@ export function findWeatherIcon(icon) {
     case '09d': //shower rain
       return '/assets/010-rain-3.svg';
     case '09n': //shower rain night
-      return '/assets/0111-night-rain.svg';
+      return '/assets/011-night-rain.svg';
 
     case '10d': //rain
       return '/assets/040-rain.svg';
