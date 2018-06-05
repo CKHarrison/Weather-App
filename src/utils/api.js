@@ -91,3 +91,8 @@ export function findWeatherIcon(icon) {
       return null;
   }
 }
+
+export function replaceString(string) {
+  const newString = string.replace(/%20/g, ' ');
+  return newString;
+}

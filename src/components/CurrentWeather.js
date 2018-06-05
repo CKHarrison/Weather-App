@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findWeatherIcon } from '../utils/api';
+import { findWeatherIcon, replaceString } from '../utils/api';
 
 const CurrentWeather = (props) => {
+  let city = props.city;
+  let state = props.state;
+
+  city = replaceString(city);
+  state = replaceString(state);
+
   return (
     <div className="current-weather-info">
       <h1>{props.date}</h1>
-      <h2>{`${props.city}, ${props.state}`}</h2>
+      <h2>{`${city}, ${state}`}</h2>
       <h2>It's Currently</h2>
 
       <p>{props.currentTemp}&#8457;</p>
