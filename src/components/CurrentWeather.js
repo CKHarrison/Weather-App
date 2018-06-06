@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findWeatherIcon, replaceString } from '../utils/api';
+import { replaceString } from '../utils/api';
 
 const CurrentWeather = (props) => {
   let city = props.city;
@@ -9,22 +9,19 @@ const CurrentWeather = (props) => {
   city = replaceString(city);
   state = replaceString(state);
 
+  const { date, currentTemp, weatherDescription, weatherType, icon } = props;
+
   return (
     <div className="current-weather-info">
-      <h1>{props.date}</h1>
+      <h1>{date}</h1>
       <h2>{`${city}, ${state}`}</h2>
       <h2>It's Currently</h2>
 
-      <p>{props.currentTemp}&#8457;</p>
+      <p>{currentTemp}&#8457;</p>
 
-      <img
-        src={findWeatherIcon(props.weatherIcon)}
-        style={{ height: '136px' }}
-        alt={props.weatherType}
-      />
+      <img src={`/assets/${icon}.svg`} style={{ height: '13.6em' }} alt={weatherType} />
       <ul>
-        <li key="2"> {props.weatherType}</li>
-        <li key="3">{props.weatherDescription}</li>
+        <li key="2"> {weatherType}</li>
       </ul>
     </div>
   );
@@ -37,7 +34,7 @@ CurrentWeather.propTypes = {
   currentTemp: PropTypes.number.isRequired,
   weatherType: PropTypes.string.isRequired,
   weatherDescription: PropTypes.string.isRequired,
-  weatherIcon: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired
 };
 
 export default CurrentWeather;

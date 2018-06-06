@@ -13,88 +13,27 @@ export const getDate = (givenDate) => {
   return date;
 };
 
-export function formatWeather(data) {
-  const firstDay = data.list[0];
-  const dayOneDate = getDate(firstDay.dt);
-  const dayOneMinTemp = firstDay.temp.min.toFixed(0);
-  const dayOneMaxTemp = firstDay.temp.max.toFixed(0);
-  const dayOneWeatherType = firstDay.weather[0].main;
-  const dayOneWeatherDescription = firstDay.weather[0].description;
-  const dayOneIcon = firstDay.weather[0].icon;
-
-  const secondDay = data.list[1];
-  const dayTwoDate = getDate(secondDay.dt);
-  const dayTwoMinTemp = secondDay.temp.min.toFixed(0);
-  const dayTwoMaxTemp = secondDay.temp.max.toFixed(0);
-  const dayTwoWeatherType = secondDay.weather[0].main;
-  const dayTwoWeatherDescription = secondDay.weather[0].description;
-  const dayTwoIcon = secondDay.weather[0].icon;
-
-  const thirdDay = data.list[2];
-  const dayThreeDate = getDate(thirdDay.dt);
-  const dayThreeMinTemp = thirdDay.temp.min.toFixed(0);
-  const dayThreeMaxTemp = thirdDay.temp.max.toFixed(0);
-  const dayThreeWeatherType = thirdDay.weather[0].main;
-  const dayThreeWeatherDescription = thirdDay.weather[0].description;
-  const dayThreeIcon = thirdDay.weather[0].icon;
-
-  const fourthDay = data.list[3];
-  const dayFourDate = getDate(fourthDay.dt);
-  const dayFourMinTemp = fourthDay.temp.min.toFixed(0);
-  const dayFourMaxTemp = fourthDay.temp.max.toFixed(0);
-  const dayFourWeatherType = fourthDay.weather[0].main;
-  const dayFourWeatherDescription = fourthDay.weather[0].description;
-  const dayFourIcon = fourthDay.weather[0].icon;
-
-  const fifthDay = data.list[4];
-  const dayFiveDate = getDate(fifthDay.dt);
-  const dayFiveMinTemp = fifthDay.temp.min.toFixed(0);
-  const dayFiveMaxTemp = fifthDay.temp.max.toFixed(0);
-  const dayFiveWeatherType = fifthDay.weather[0].main;
-  const dayFiveWeatherDescription = fifthDay.weather[0].description;
-  const dayFiveIcon = fifthDay.weather[0].icon;
-
-  const fiveDayForecast = {
-    dayOne: {
-      date: dayOneDate,
-      minTemp: dayOneMinTemp,
-      maxTemp: dayOneMaxTemp,
-      weatherType: dayOneWeatherType,
-      weatherDescription: dayOneWeatherDescription,
-      icon: dayOneIcon
-    },
-    dayTwo: {
-      date: dayTwoDate,
-      minTemp: dayTwoMinTemp,
-      maxTemp: dayTwoMaxTemp,
-      weatherType: dayTwoWeatherType,
-      weatherDescription: dayTwoWeatherDescription,
-      icon: dayTwoIcon
-    },
-    dayThree: {
-      date: dayThreeDate,
-      minTemp: dayThreeMinTemp,
-      maxTemp: dayThreeMaxTemp,
-      weatherType: dayThreeWeatherType,
-      weatherDescription: dayThreeWeatherDescription,
-      icon: dayThreeIcon
-    },
-    dayFour: {
-      date: dayFourDate,
-      minTemp: dayFourMinTemp,
-      maxTemp: dayFourMaxTemp,
-      weatherType: dayFourWeatherType,
-      weatherDescription: dayFourWeatherDescription,
-      icon: dayFourIcon
-    },
-    dayFive: {
-      date: dayFiveDate,
-      minTemp: dayFiveMinTemp,
-      maxTemp: dayFiveMaxTemp,
-      weatherType: dayFiveWeatherType,
-      weatherDescription: dayFiveWeatherDescription,
-      icon: dayFiveIcon
-    }
-  };
-  return fiveDayForecast;
-}
+export const formatWeatherDescription = (string) => {
+  switch (string) {
+    case string === ('01d' || '01n'):
+      return 'Clear Skies';
+    case string === ('02d' || '02n'):
+      return 'Light Clouds';
+    case string === ('03d' || '03n'):
+      return 'Scattered Clouds';
+    case string === ('04d' || '04n'):
+      return 'Cloudy';
+    case string === ('09d' || '09n'):
+      return 'Rain Showers';
+    case string === ('10d' || '10n'):
+      return 'Rain';
+    case string === ('11d' || '11n'):
+      return 'Thunderstorms';
+    case string === ('13d' || '13n'):
+      return 'Snow';
+    case string === ('50d' || '50n'):
+      return 'Mist';
+    default:
+      return string;
+  }
+};

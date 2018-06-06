@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findWeatherIcon } from '../utils/api';
 
-const FiveDayForecast = ({ forecast }) => {
-  const { date, icon, maxTemp, minTemp, weatherDescription, weatherType } = forecast;
+import { formatWeatherDescription } from '../utils/helpers';
+
+const FiveDayForecast = (props) => {
+  const { date, icon, maxTemp, minTemp, weatherDescription, weatherType } = props;
   return (
     <div className="forecast-info">
       <h3>{date}</h3>
-      <img src={findWeatherIcon(icon)} style={{ height: '136px' }} alt={weatherType} />
+      <img src={`/assets/${icon}.svg`} style={{ height: '13.6em' }} alt={weatherType} />
       <div>
         <ul>
           <li key={1}> Low: {minTemp}&#8457;</li>
           <li key={2}> High: {maxTemp}&#8457;</li>
-          <li key={3}> {weatherDescription} </li>
+          <li key={3}> {weatherType} </li>
         </ul>
       </div>
     </div>
@@ -22,5 +23,10 @@ const FiveDayForecast = ({ forecast }) => {
 export default FiveDayForecast;
 
 FiveDayForecast.propTypes = {
-  forecast: PropTypes.object.isRequired
+  date: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  maxTemp: PropTypes.string.isRequired,
+  minTemp: PropTypes.string.isRequired,
+  weatherDescription: PropTypes.string.isRequired,
+  weatherType: PropTypes.string.isRequired
 };

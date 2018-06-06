@@ -7,6 +7,7 @@ import {
 } from '../utils/api';
 import FiveDayForecast from './FiveDayForecast';
 import Loading from '../utils/Loading';
+import { getDate } from '../utils/helpers';
 
 class Forecast extends Component {
   state = {
@@ -17,7 +18,8 @@ class Forecast extends Component {
     weatherType: '',
     weatherDescription: '',
     weatherIcon: '',
-    forecast: ''
+    forecast: [],
+    loading: true
   };
   async componentDidMount() {
     const location = this.props.location.search.toUpperCase().slice(1);
@@ -43,11 +45,12 @@ class Forecast extends Component {
       weatherType,
       weatherDescription,
       weatherIcon,
-      forecast
+      forecast,
+      loading: false
     });
   }
   render() {
-    if (!this.state.currentTemp) {
+    if (this.state.loading) {
       return (
         <div className="loading">
           <Loading />
@@ -64,28 +67,23 @@ class Forecast extends Component {
             currentTemp={this.state.currentTemp}
             weatherType={this.state.weatherType}
             weatherDescription={this.state.weatherDescription}
-            weatherIcon={this.state.weatherIcon}
+            icon={this.state.weatherIcon}
           />
         </div>
         <div className="forecast-weather">
-          <div className="tile">
-            <FiveDayForecast forecast={this.state.forecast.dayOne} />
-          </div>
-
-          <div className="tile">
-            <FiveDayForecast forecast={this.state.forecast.dayTwo} />
-          </div>
-
-          <div className="tile">
-            <FiveDayForecast forecast={this.state.forecast.dayThree} />
-          </div>
-
-          <div className="tile">
-            <FiveDayForecast forecast={this.state.forecast.dayFour} />
-          </div>
-          <div className="tile">
-            <FiveDayForecast forecast={this.state.forecast.dayFive} />
-          </div>
+          {this.state.forecast.list.map((weatherItem) => (
+            <div className="tile">
+              <FiveDayForecast
+                key={weatherItem.weather[0].id}
+                date={getDate(weatherItem.dt)}
+                minTemp={weatherItem.temp.min.toFixed(0)}
+                maxTemp={weatherItem.temp.max.toFixed(0)}
+                weatherDescription={weatherItem.weather[0].description}
+                weatherType={weatherItem.weather[0].main}
+                icon={weatherItem.weather[0].icon}
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
