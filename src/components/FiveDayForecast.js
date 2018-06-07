@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { formatWeatherDescription } from '../utils/helpers';
-
 const FiveDayForecast = (props) => {
   const { date, icon, maxTemp, minTemp, weatherDescription, weatherType } = props;
   return (

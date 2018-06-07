@@ -14,6 +14,9 @@
     align-items: center;
     margin-bottom: 5em;
   }
+  .weather {
+    height: 30%;
+  }
 
   h3 {
     margin-bottom: 0.8em;
@@ -117,15 +120,18 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 60%;
 }
 
 .address-form {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .btn {
-  margin-left: 10px;
+  margin-left: 1em;
 }
 
 .centered {

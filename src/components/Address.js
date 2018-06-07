@@ -50,7 +50,7 @@ class Address extends Component {
             onChange={this.handleChange}
             placeholder="Enter the name of city"
           />
-          <RaisedButton type="submit" label="Submit" disabled={!this.state.value} />
+          <RaisedButton type="submit" label="Submit" disabled={!this.state.value} className='btn' />
         </form>
 
         {fireRedirect && (
